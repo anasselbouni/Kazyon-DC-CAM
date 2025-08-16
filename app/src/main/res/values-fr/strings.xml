@@ -1,0 +1,91 @@
+<resources>
+    <string name="app_name">Kazyon Cam V2</string>
+
+    <string name="permissions_granted">Autorisations accordées !</string>
+    <string name="permissions_denied">Autorisations refusées. Impossible de continuer sans les autorisations nécessaires.</string>
+    <string name="permissions_already_granted">Autorisations déjà accordées.</string>
+
+    <string name="failed_to_create_image_file">Échec de la création du fichier image.</string>
+    <string name="photo_capture_cancelled">Capture photo annulée.</string>
+    <string name="uploading_photo_message">Téléchargement de la photo…</string>
+    <string name="upload_success_message">Photo téléchargée avec succès : %1$s</string>
+    <string name="upload_unauthorized_error">Échec du téléchargement : Non autorisé. Vérifiez la clé API.</string>
+    <string name="upload_failed_message">Échec du téléchargement : %1$d - %2$s</string>
+    <string name="error_uploading_photo">Erreur lors du téléchargement de la photo : %1$s</string>
+    <string name="failed_to_load_image_error">Échec du chargement de l\'image : %1$s</string>
+    <string name="capturing_photo_message">Capture de la photo en cours…</string>
+    <string name="failed_to_process_or_upload_image">Échec du traitement ou du téléchargement de l\'image : %1$s</string>
+    <string name="photo_capture_failed">Échec de la capture de la photo : %1$s</string>
+    <string name="capturing_image_message">Capture de l\'image en cours…</string>
+
+    <string name="enter_magasin_reference_prompt">Veuillez saisir le Magasin et la Référence.</string>
+    <string name="magasin_reference_empty_upload_error">Le Magasin ou la Référence ne peut pas être vide pour le téléchargement.</string>
+    <string name="input_validation_failed">Échec de la validation des entrées. Veuillez vérifier les champs.</string>
+    <string name="input_validation_failed_message">Veuillez vous assurer que tous les champs de saisie sont correctement remplis et respectent les exigences (Magasin : Mxxx, 4 caractères ; Référence : 5xxxxxxxx, 10 caractères).</string>
+    <string name="enter_magasin_and_reference">Veuillez saisir les noms de Magasin et de Référence.</string>
+
+    <string name="error_magasin_empty">Le champ Magasin ne peut pas être vide.</string>
+    <string name="error_magasin_length">Le Magasin doit contenir exactement 4 caractères (ex: M001).</string>
+    <string name="error_magasin_starts_with_M">Le Magasin doit commencer par \'M\'.</string>
+    <string name="error_magasin_numbers_after_M">Le Magasin doit avoir des chiffres après \'M\'.</string>
+
+    <string name="error_reference_empty">Le champ Référence ne peut pas être vide.</string>
+    <string name="error_reference_length">La Référence doit contenir exactement 10 caractères.</string>
+    <string name="error_reference_starts_with_5">La Référence doit commencer par \'5\'.</string>
+    <string name="error_reference_only_numbers">La Référence ne doit contenir que des chiffres.</string>
+
+    <string name="ok_button">OK</string>
+    <string name="upload_error">Erreur de Téléchargement</string>
+    <string name="connection_error">Erreur de Connexion</string>
+    <string name="camera_error">Erreur de Caméra</string>
+    <string name="image_processing_error">Erreur de Traitement d\'Image</string>
+
+    <string name="app_background_logo_desc">Logo d\'arrière-plan de l\'application</string>
+    <string name="magasin_hint">Magasin (ex: M001)</string>
+    <string name="reference_hint">Référence (ex: 5000000000)</string>
+    <string name="captured_image_desc">Aperçu de l\'image capturée</string>
+    <string name="capture_and_upload_button_text">Capturer et Télécharger</string>
+    <string name="uploading_text">Téléchargement en cours…</string>
+    <string name="start_camera_session">Démarrer la Session Caméra</string>
+    <string name="current_magasin_ref">Actuel : %1$s_%2$s</string>
+    <string name="capture_photo">Capturer Photo</string>
+    <string name="new_session">Nouveau Magasin/Référence</string>
+    <string name="finish_session">Terminer la Session</string>
+    <string name="magasin_label">Magasin :</string>
+    <string name="reference_label">Référence :</string>
+    <string name="send">Envoyer</string>
+    <string name="retake">Reprendre</string>
+    <string name="session_id_label">ID de Session : %1$s</string>
+    <string name="new_session_started">Nouvelle session démarrée : %1$s</string>
+    <string name="error_magasin_format">Le Magasin doit contenir 4 caractères, commencer par \'M\' et se terminer par 3 chiffres (ex: M001).</string>
+    <string name="error_reference_format">La Référence doit contenir 10 chiffres et commencer par \'5\' (ex: 5000000000).</string>
+
+    <string name="choose_language">Choisissez votre langue</string>
+    <string name="english">Anglais</string>
+    <string name="french">Français</string>
+    <string name="arabic">Arabe</string>
+    <string name="status_approved">Statut: Approuvé</string>
+    <string name="status_not_approved">Statut: Non approuvé</string>
+    <string name="status_error">Statut: Erreur (code %1$d)</string>
+    <string name="status_connection_error">Statut: Erreur de connexion</string>
+    <string name="status_awaiting_approval">Statut: En attente d\'approbation</string>
+    <string name="status_registration_error">Statut: Erreur d\'enregistrement</string>
+    <string name="registering_device_message">Enregistrement de l\'appareil sur le serveur…</string>
+    <string name="device_already_approved">L\'appareil est déjà enregistré et approuvé.</string>
+    <string name="device_registered_waiting">Appareil enregistré. En attente de l\'approbation du serveur.</string>
+    <string name="registration_failed">Échec de l\'enregistrement</string>
+    <string name="server_response_error">Le serveur a répondu avec le code : %1$d</string>
+    <string name="failed_to_connect_for_registration">Échec de la connexion au serveur pour l\'enregistrement : %1$s</string>
+    <string name="permissions_not_granted">Autorisations non accordées par l\'utilisateur.</string>
+
+
+    <string name="no_image_to_send">Aucune image à envoyer.</string>
+    <string name="waiting_for_approval_message">En attente de l\'approbation du serveur…</string>
+    <string name="registration_failed_title">Échec de l\'enregistrement</string>
+    <string name="connection_error_title">Erreur de connexion</string>
+    <string name="registration_connection_failed">Échec de la connexion au serveur pour l\'enregistrement : %1$s</string>
+    <string name="permissions_not_granted_toast">Autorisations non accordées par l\'utilisateur.</string>
+    <string name="device_not_authorized">Cet appareil n\'est pas encore autorisé. Veuillez attendre qu\'un administrateur de serveur approuve votre appareil.</string>
+    <string name="choose_your_language">Choose Your Language</string>
+
+</resources>

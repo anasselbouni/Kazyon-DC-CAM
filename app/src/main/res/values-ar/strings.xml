@@ -1,0 +1,88 @@
+<resources>
+    <string name="app_name">Kazyon Cam V2</string>
+
+    <string name="permissions_granted">تم منح الأذونات!</string>
+    <string name="permissions_denied">تم رفض الأذونات. لا يمكن المتابعة بدون الأذونات اللازمة.</string>
+    <string name="permissions_already_granted">تم منح الأذونات بالفعل.</string>
+
+    <string name="failed_to_create_image_file">فشل في إنشاء ملف الصورة.</string>
+    <string name="photo_capture_cancelled">تم إلغاء التقاط الصورة.</string>
+    <string name="uploading_photo_message">جاري تحميل الصورة…</string>
+    <string name="upload_success_message">تم تحميل الصورة بنجاح: %1$s</string>
+    <string name="upload_unauthorized_error">فشل التحميل: غير مصرح به. تحقق من مفتاح API.</string>
+    <string name="upload_failed_message">فشل التحميل: %1$d - %2$s</string>
+    <string name="error_uploading_photo">حدث خطأ أثناء تحميل الصورة: %1$s</string>
+    <string name="failed_to_load_image_error">فشل في تحميل الصورة: %1$s</string>
+    <string name="capturing_photo_message">جاري التقاط الصورة…</string>
+    <string name="failed_to_process_or_upload_image">فشل في معالجة أو تحميل الصورة: %1$s</string>
+    <string name="photo_capture_failed">فشل التقاط الصورة: %1$s</string>
+    <string name="capturing_image_message">جاري التقاط الصورة…</string>
+
+    <string name="enter_magasin_reference_prompt">الرجاء إدخال المتجر والمرجع.</string>
+    <string name="magasin_reference_empty_upload_error">لا يمكن أن يكون المتجر أو المرجع فارغًا للتحميل.</string>
+    <string name="input_validation_failed">فشل التحقق من الإدخال. يرجى التحقق من الحقول.</string>
+    <string name="input_validation_failed_message">الرجاء التأكد من أن جميع حقول الإدخال مملوءة بشكل صحيح وتفي بالمتطلبات (المتجر: Mxxx، 4 أحرف؛ المرجع: 5xxxxxxxx، 10 أحرف).</string>
+    <string name="enter_magasin_and_reference">الرجاء إدخال اسم المتجر والمرجع.</string>
+
+    <string name="error_magasin_empty">حقل المتجر لا يمكن أن يكون فارغًا.</string>
+    <string name="error_magasin_length">يجب أن يحتوي المتجر على 4 أحرف بالضبط (مثال: M001).</string>
+    <string name="error_magasin_starts_with_M">يجب أن يبدأ المتجر بـ \'M\'.</string>
+    <string name="error_magasin_numbers_after_M">يجب أن يحتوي المتجر على أرقام بعد \'M\'.</string>
+
+    <string name="error_reference_empty">حقل المرجع لا يمكن أن يكون فارغًا.</string>
+    <string name="error_reference_length">يجب أن يحتوي المرجع على 10 أحرف بالضبط.</string>
+    <string name="error_reference_starts_with_5">يجب أن يبدأ المرجع بـ \'5\'.</string>
+    <string name="error_reference_only_numbers">يجب أن يحتوي المرجع على أرقام فقط.</string>
+
+    <string name="ok_button">موافق</string>
+    <string name="upload_error">خطأ في التحميل</string>
+    <string name="connection_error">خطأ في الاتصال</string>
+    <string name="camera_error">خطأ في الكاميرا</string>
+    <string name="image_processing_error">خطأ في معالجة الصورة</string>
+
+    <string name="app_background_logo_desc">شعار الخلفية للتطبيق</string>
+    <string name="magasin_hint">المتجر (مثال: M001)</string>
+    <string name="reference_hint">المرجع (مثال: 5000000000)</string>
+    <string name="captured_image_desc">معاينة الصورة الملتقطة</string>
+    <string name="capture_and_upload_button_text">التقاط وتحميل</string>
+    <string name="uploading_text">جاري التحميل…</string>
+    <string name="start_camera_session">بدء جلسة الكاميرا</string>
+    <string name="current_magasin_ref">الحالي: %1$s_%2$s</string>
+    <string name="capture_photo">التقاط صورة</string>
+    <string name="new_session">متجر/مرجع جديد</string>
+    <string name="finish_session">إنهاء الجلسة</string>
+    <string name="magasin_label">المتجر:</string>
+    <string name="reference_label">المرجع:</string>
+    <string name="send">إرسال</string>
+    <string name="retake">إعادة التقاط</string>
+    <string name="session_id_label">معرف الجلسة: %1$s</string>
+    <string name="new_session_started">بدأت جلسة جديدة: %1$s</string>
+    <string name="error_magasin_format">يجب أن يحتوي المتجر على 4 أحرف، تبدأ بـ \'M\' وتنتهي بـ 3 أرقام (مثال: M001).</string>
+    <string name="error_reference_format">يجب أن يحتوي المرجع على 10 أرقام ويبدأ بـ \'5\' (مثال: 5000000000).</string>
+
+    <string name="choose_language">اختر لغتك</string>
+    <string name="english">الإنجليزية</string>
+    <string name="french">الفرنسية</string>
+    <string name="arabic">العربية</string>
+    <string name="status_approved">الحالة: موافق عليه</string>
+    <string name="status_not_approved">الحالة: غير موافق عليه</string>
+    <string name="status_error">الحالة: خطأ (الرمز %1$d)</string>
+    <string name="status_connection_error">الحالة: خطأ في الاتصال</string>
+    <string name="status_awaiting_approval">الحالة: بانتظار الموافقة</string>
+    <string name="status_registration_error">الحالة: خطأ في التسجيل</string>
+    <string name="registering_device_message">جاري تسجيل الجهاز على الخادم…</string>
+    <string name="device_already_approved">الجهاز مسجل بالفعل وموافق عليه.</string>
+    <string name="device_registered_waiting">تم تسجيل الجهاز. بانتظار موافقة الخادم.</string>
+    <string name="registration_failed">فشل التسجيل</string>
+    <string name="server_response_error">استجاب الخادم بالرمز: %1$d</string>
+    <string name="failed_to_connect_for_registration">فشل الاتصال بالخادم للتسجيل: %1$s</string>
+    <string name="permissions_not_granted">لم يمنح المستخدم الأذونات.</string>
+    <string name="no_image_to_send">لا توجد صورة لإرسالها.</string>
+    <string name="waiting_for_approval_message">بانتظار موافقة الخادم…</string>
+    <string name="registration_failed_title">فشل التسجيل</string>
+    <string name="connection_error_title">خطأ في الاتصال</string>
+    <string name="registration_connection_failed">فشل الاتصال بالخادم للتسجيل: %1$s</string>
+    <string name="permissions_not_granted_toast">لم يمنح المستخدم الأذونات.</string>
+    <string name="device_not_authorized">هذا الجهاز غير مصرح به بعد. يرجى الانتظار حتى يوافق مسؤول الخادم على جهازك.</string>
+    <string name="choose_your_language">Choose Your Language</string>
+</resources>

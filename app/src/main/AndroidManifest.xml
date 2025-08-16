@@ -40,6 +40,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".CameraActivity"
+            android:exported="false" />
+
         <!-- Provider for file URIs when using camera intent -->
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -1,67 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".MainActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:id="@+id/camera_input_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/magasin_label"
-            android:labelFor="@id/magasin_edit_text"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
-
-        <EditText
-            android:id="@+id/magasin_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/magasin_hint"
-            android:inputType="textCapCharacters|numberSigned"
-            android:maxLength="4"
-            android:autofillHints="auto" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/reference_label"
-            android:labelFor="@id/reference_edit_text"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
-
-        <EditText
-            android:id="@+id/reference_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/reference_hint"
-            android:inputType="number"
-            android:maxLength="10"
-            android:autofillHints="auto" />
-
-        <Button
-            android:id="@+id/start_camera_session_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/start_camera_session" />
-
-    </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:visibility="gone" />
-</LinearLayout>
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/language_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_your_language"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="48dp"
+            app:layout_constraintBottom_toTopOf="@id/language_buttons_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/language_buttons_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <Button
+                android:id="@+id/english_button"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/english"
+                android:backgroundTint="@color/material_dynamic_primary_container"
+                android:textColor="@android:color/white"
+                android:layout_margin="8dp" />
+
+            <Button
+                android:id="@+id/french_button"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/french"
+                android:backgroundTint="@color/material_dynamic_primary_container"
+                android:textColor="@android:color/white"
+                android:layout_margin="8dp" />
+
+            <Button
+                android:id="@+id/arabic_button"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/arabic"
+                android:backgroundTint="@color/material_dynamic_primary_container"
+                android:textColor="@android:color/white"
+                android:layout_margin="8dp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

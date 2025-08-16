@@ -28,7 +28,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:src="@tools:sample/backgrounds/scenic" />
 
-    <!-- Input Layout: Magasin and Reference (horizontal, more compact, adjusted sizes) -->
     <LinearLayout
         android:id="@+id/inputLayout"
         android:layout_width="0dp"
@@ -48,7 +47,7 @@
             android:text="@string/magasin_label"
             android:textColor="@android:color/white"
             android:textSize="14sp"
-        android:layout_marginEnd="4dp"/>
+            android:layout_marginEnd="4dp"/>
 
         <EditText
             android:id="@+id/magasinNameEditText"
@@ -72,7 +71,7 @@
             android:text="@string/reference_label"
             android:textColor="@android:color/white"
             android:textSize="14sp"
-        android:layout_marginEnd="4dp"/>
+            android:layout_marginEnd="4dp"/>
 
         <EditText
             android:id="@+id/referenceNameEditText"
@@ -90,7 +89,22 @@
             android:textSize="14sp"/>
     </LinearLayout>
 
-    <!-- Buttons for Camera State (Only Capture) -->
+    <TextView
+        android:id="@+id/statusTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/status_not_approved"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputLayout"
+        android:background="#80000000"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"/>
+
     <LinearLayout
         android:id="@+id/camera_buttons_layout"
         android:layout_width="0dp"
@@ -102,8 +116,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
-
-        <!-- Removed newSessionButton from here -->
 
         <Button
             android:id="@+id/imageCaptureButton"
@@ -125,7 +137,6 @@
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
-    <!-- Buttons for Image Review State (Send and Retake) -->
     <LinearLayout
         android:id="@+id/review_buttons_layout"
         android:layout_width="0dp"

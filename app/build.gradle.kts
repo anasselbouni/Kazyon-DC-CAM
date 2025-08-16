@@ -7,6 +7,9 @@ android {
     namespace = "ma.kazyon.dccam"
     compileSdk = 36
 
+    buildFeatures {
+        dataBinding = true
+    }
     defaultConfig {
         applicationId = "ma.kazyon.dccam"
         minSdk = 24
