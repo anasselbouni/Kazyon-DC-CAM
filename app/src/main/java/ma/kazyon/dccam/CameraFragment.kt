@@ -88,7 +88,7 @@ class CameraFragment : Fragment() {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 
         // --- API Endpoints ---
-        private const val HOST = "192.168.11.101" // if changed, please update network_security_config.xml and server as well
+        private const val HOST = "192.168.100.136" // if changed, please update network_security_config.xml and server as well
         private const val PORT = 6868 // if changed, please update port in server
         private const val CHECK_STATUS = "http://$HOST:$PORT/check_status"
         private const val API_ENDPOINT = "http://$HOST:$PORT/upload_image"
