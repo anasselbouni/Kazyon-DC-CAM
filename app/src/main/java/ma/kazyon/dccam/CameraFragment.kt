@@ -134,56 +134,48 @@ class CameraFragment : Fragment() {
         // --- Input validation setup ---
         referenceNameEditText.filters = arrayOf(ReferenceInputFilter())
 
-        // --- Auto-format Magasin input (always starts with "M" + 3 digits) ---
+        // --- Auto-format number input (4 characters long) ---
         magasinNameEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
                 magasinNameEditText.removeTextChangedListener(this)
                 val currentText = s.toString()
-                val prefix = "M"
+                val digitsOnly = currentText.filter { it.isDigit() }
+                var newText = digitsOnly
                 var cursorPosition = magasinNameEditText.selectionStart
 
-                if (currentText.isEmpty() || !currentText.startsWith(prefix, ignoreCase = true)) {
-                    val newText = prefix
+                if (newText.length > 4) {
+                    newText = newText.substring(0, 4)
+                    cursorPosition = 4
+                }
+
+                if (currentText != newText) {
                     magasinNameEditText.setText(newText)
-                    magasinNameEditText.setSelection(newText.length)
-                } else {
-                    val digitsOnly = currentText.substring(1).filter { it.isDigit() }
-                    val newText = prefix + digitsOnly
-                    if (currentText != newText) {
-                        magasinNameEditText.setText(newText)
-                        cursorPosition = newText.length
-                    }
-                    if (magasinNameEditText.text.length > 4) {
-                        val truncatedText = magasinNameEditText.text.toString().substring(0, 4)
-                        magasinNameEditText.setText(truncatedText)
-                        cursorPosition = 4
-                    } else if (magasinNameEditText.text.length < 1) {
-                        magasinNameEditText.setText(prefix)
-                        cursorPosition = 1
-                    }
                 }
-                if (cursorPosition > magasinNameEditText.text.length) {
-                    cursorPosition = magasinNameEditText.text.length
+
+                if (cursorPosition > newText.length) {
+                    cursorPosition = newText.length
                 }
+
                 magasinNameEditText.setSelection(cursorPosition)
                 magasinNameEditText.addTextChangedListener(this)
             }
         })
 
-        // Autofill prefix ("M") if empty
-        if (magasinNameEditText.text.toString().isEmpty()) {
-            magasinNameEditText.setText("M")
-            magasinNameEditText.setSelection(1)
+        // Optional: You can remove this part since the input should be empty initially.
+        // However, if you want to ensure it's empty on load, you can keep it.
+        if (magasinNameEditText.text.toString().isNotEmpty()) {
+            magasinNameEditText.setText("")
+            magasinNameEditText.setSelection(0)
         }
 
         // --- Select all text when focus gained ---
-        magasinNameEditText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                (v as? EditText)?.setSelection(1, v.text.length)
-            }
-        }
+//        magasinNameEditText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+//            if (hasFocus) {
+//                (v as? EditText)?.setSelection(1, v.text.length)
+//            }
+//        }
 
         referenceNameEditText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
@@ -617,7 +609,7 @@ class CameraFragment : Fragment() {
 
     // --- Input validation ---
     private fun isValidInput(magasin: String, reference: String): Boolean {
-        if (!magasin.matches(Regex("(?i)M\\d{3}"))) {
+        if (!magasin.matches(Regex("(?i)\\d{4}"))) {
             Toast.makeText(requireContext(), getString(R.string.error_magasin_format), Toast.LENGTH_SHORT).show()
             magasinNameEditText.requestFocus()
             return false
