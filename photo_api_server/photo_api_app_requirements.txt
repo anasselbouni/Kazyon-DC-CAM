@@ -1,0 +1,4 @@
+Flask==2.3.2
+Werkzeug==2.3.8
+requests==2.31.0
+PyQt5==5.15.10
