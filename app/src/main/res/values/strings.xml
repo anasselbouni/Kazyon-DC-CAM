@@ -18,16 +18,16 @@
     <string name="photo_capture_failed">Photo capture failed: %1$s</string>
     <string name="capturing_image_message">Capturing image in progress…</string>
 
-    <string name="enter_magasin_reference_prompt">Please enter Magasin and Reference.</string>
-    <string name="magasin_reference_empty_upload_error">Magasin or Reference cannot be empty for upload.</string>
+    <string name="enter_magasin_reference_prompt">Please enter Store and Reference.</string>
+    <string name="magasin_reference_empty_upload_error">Store or Reference cannot be empty for upload.</string>
     <string name="input_validation_failed">Input validation failed. Please check the fields.</string>
-    <string name="input_validation_failed_message">Please ensure all input fields are correctly filled and meet the requirements (Magasin: Mxxx, 4 characters; Reference: 5xxxxxxxx, 10 characters).</string>
-    <string name="enter_magasin_and_reference">Please enter Magasin and Reference names.</string>
+    <string name="input_validation_failed_message">Please ensure all input fields are correctly filled and meet the requirements (Store: xxxx, 4 characters; Reference: 5xxxxxxxx, 10 characters).</string>
+    <string name="enter_magasin_and_reference">Please enter Store and Reference names.</string>
 
     <string name="error_magasin_empty">The Magasin field cannot be empty.</string>
-    <string name="error_magasin_length">Magasin must contain exactly 4 characters (ex: M001).</string>
-    <string name="error_magasin_starts_with_M">Magasin must start with \'M\'.</string>
-    <string name="error_magasin_numbers_after_M">Magasin must have numbers after \'M\'.</string>
+    <string name="error_magasin_length">Store must contain exactly 4 numbers (ex: 1234).</string>
+    <string name="error_magasin_starts_with_M">Store must contain exactly 4 numbers (ex: 1234).</string>
+    <string name="error_magasin_numbers_after_M">Store must contain exactly 4 numbers (ex: 1234).</string>
 
     <string name="error_reference_empty">The Reference field cannot be empty.</string>
     <string name="error_reference_length">Reference must contain exactly 10 characters.</string>
@@ -41,7 +41,7 @@
     <string name="image_processing_error">Image Processing Error</string>
 
     <string name="app_background_logo_desc">Application background logo</string>
-    <string name="magasin_hint">Magasin (ex: M001)</string>
+    <string name="magasin_hint">Store (ex: 1234)</string>
     <string name="reference_hint">Reference (ex: 5000000000)</string>
     <string name="captured_image_desc">Preview of the captured image</string>
     <string name="capture_and_upload_button_text">Capture and Upload</string>
@@ -49,15 +49,15 @@
     <string name="start_camera_session">Start Camera Session</string>
     <string name="current_magasin_ref">Current: %1$s_%2$s</string>
     <string name="capture_photo">Capture Photo</string>
-    <string name="new_session">New Magasin/Reference</string>
+    <string name="new_session">New Store/Reference</string>
     <string name="finish_session">Finish Session</string>
-    <string name="magasin_label">Magasin:</string>
+    <string name="magasin_label">Store:</string>
     <string name="reference_label">Reference:</string>
     <string name="send">Send</string>
     <string name="retake">Retake</string>
     <string name="session_id_label">Session ID: %1$s</string>
     <string name="new_session_started">New session started: %1$s</string>
-    <string name="error_magasin_format">Magasin must contain 4 characters, start with \'M\' and end with 3 numbers (ex: M001).</string>
+    <string name="error_magasin_format">Store must contain exactly 4 numbers (ex: 1234).</string>
     <string name="error_reference_format">Reference must contain 10 numbers and start with \'5\' (ex: 5000000000).</string>
 
     <string name="choose_language">Choose Your Language</string>

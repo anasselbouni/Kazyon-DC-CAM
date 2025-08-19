@@ -25,9 +25,9 @@
     <string name="enter_magasin_and_reference">الرجاء إدخال اسم المتجر والمرجع.</string>
 
     <string name="error_magasin_empty">حقل المتجر لا يمكن أن يكون فارغًا.</string>
-    <string name="error_magasin_length">يجب أن يحتوي المتجر على 4 أحرف بالضبط (مثال: M001).</string>
-    <string name="error_magasin_starts_with_M">يجب أن يبدأ المتجر بـ \'M\'.</string>
-    <string name="error_magasin_numbers_after_M">يجب أن يحتوي المتجر على أرقام بعد \'M\'.</string>
+    <string name="error_magasin_length">يجب أن يتكون الرمز من 4 أرقام فقط (مثال: 1234).</string>
+    <string name="error_magasin_starts_with_M">يجب أن يتكون الرمز من 4 أرقام فقط (مثال: 1234).</string>
+    <string name="error_magasin_numbers_after_M">يجب أن يتكون الرمز من 4 أرقام فقط (مثال: 1234).</string>
 
     <string name="error_reference_empty">حقل المرجع لا يمكن أن يكون فارغًا.</string>
     <string name="error_reference_length">يجب أن يحتوي المرجع على 10 أحرف بالضبط.</string>
@@ -41,7 +41,7 @@
     <string name="image_processing_error">خطأ في معالجة الصورة</string>
 
     <string name="app_background_logo_desc">شعار الخلفية للتطبيق</string>
-    <string name="magasin_hint">المتجر (مثال: M001)</string>
+    <string name="magasin_hint">المتجر (مثال: 1234)</string>
     <string name="reference_hint">المرجع (مثال: 5000000000)</string>
     <string name="captured_image_desc">معاينة الصورة الملتقطة</string>
     <string name="capture_and_upload_button_text">التقاط وتحميل</string>
@@ -57,7 +57,7 @@
     <string name="retake">إعادة التقاط</string>
     <string name="session_id_label">معرف الجلسة: %1$s</string>
     <string name="new_session_started">بدأت جلسة جديدة: %1$s</string>
-    <string name="error_magasin_format">يجب أن يحتوي المتجر على 4 أحرف، تبدأ بـ \'M\' وتنتهي بـ 3 أرقام (مثال: M001).</string>
+    <string name="error_magasin_format">يجب أن يتكون الرمز من 4 أرقام فقط (مثال: 1234).</string>
     <string name="error_reference_format">يجب أن يحتوي المرجع على 10 أرقام ويبدأ بـ \'5\' (مثال: 5000000000).</string>
 
     <string name="choose_language">اختر لغتك</string>

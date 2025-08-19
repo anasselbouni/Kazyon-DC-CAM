@@ -25,9 +25,9 @@
     <string name="enter_magasin_and_reference">Veuillez saisir les noms de Magasin et de Référence.</string>
 
     <string name="error_magasin_empty">Le champ Magasin ne peut pas être vide.</string>
-    <string name="error_magasin_length">Le Magasin doit contenir exactement 4 caractères (ex: M001).</string>
-    <string name="error_magasin_starts_with_M">Le Magasin doit commencer par \'M\'.</string>
-    <string name="error_magasin_numbers_after_M">Le Magasin doit avoir des chiffres après \'M\'.</string>
+    <string name="error_magasin_length">Le Magasin doit contenir 4 chiffres (ex: 1234).</string>
+    <string name="error_magasin_starts_with_M">Le Magasin doit contenir 4 chiffres (ex: 1234).</string>
+    <string name="error_magasin_numbers_after_M">Le Magasin doit contenir 4 chiffres (ex: 1234).</string>
 
     <string name="error_reference_empty">Le champ Référence ne peut pas être vide.</string>
     <string name="error_reference_length">La Référence doit contenir exactement 10 caractères.</string>
@@ -57,7 +57,7 @@
     <string name="retake">Reprendre</string>
     <string name="session_id_label">ID de Session : %1$s</string>
     <string name="new_session_started">Nouvelle session démarrée : %1$s</string>
-    <string name="error_magasin_format">Le Magasin doit contenir 4 caractères, commencer par \'M\' et se terminer par 3 chiffres (ex: M001).</string>
+    <string name="error_magasin_format">Le Magasin doit contenir 4 chiffres (ex: 1234).</string>
     <string name="error_reference_format">La Référence doit contenir 10 chiffres et commencer par \'5\' (ex: 5000000000).</string>
 
     <string name="choose_language">Choisissez votre langue</string>
