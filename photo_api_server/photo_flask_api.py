@@ -5,16 +5,15 @@ from flask import Flask, request, jsonify, abort
 from werkzeug.utils import secure_filename
 from functools import wraps
 from flask import request, jsonify
-
+from waitress import serve
+import logging
 
 # --- Config ---
-# UPLOAD_FOLDER = r"" 
-DB_FILE = "server_api.db"
-ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png", "gif"}
-ADMIN_API_KEY = "secret-admin-key"
+DB_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Cam_DB.db")
+ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png", "gif"}     # Allowed image formats
+ADMIN_API_KEY = "b4a8f4f1d1d21a8b0e4b39a5827f3a6c7d1d7d43a6f1e7c4e3e2b19a53b7c9fa"
 
 app = Flask(__name__)
-# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def require_admin_key(f):
     @wraps(f)
@@ -27,19 +26,21 @@ def require_admin_key(f):
 
 # --- Helper functions ---
 def init_db():
-    """Initialize the SQLite database and create the tables if they don't exist."""
+    """Initialize the SQLite database and create api_keys table if it doesn’t exist."""
     with sqlite3.connect(DB_FILE) as conn:
         c = conn.cursor()
+        # api_keys table
         c.execute("""
             CREATE TABLE IF NOT EXISTS api_keys (
-                ip TEXT PRIMARY KEY,
-                key TEXT NOT NULL,
-                name TEXT,
-                status TEXT NOT NULL CHECK(status IN ('allowed', 'pending')),
-                last_request_time TEXT
+                ip TEXT PRIMARY KEY,                                  -- Device IP
+                key TEXT NOT NULL,                                    -- API key
+                name TEXT,                                            -- Device name
+                status TEXT NOT NULL CHECK(status IN ('allowed', 'pending')),  -- Device status
+                last_request_time TEXT                                -- Last request timestamp
             )
         """)
         
+        # request_logs table
         c.execute("""
             CREATE TABLE IF NOT EXISTS request_logs (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -52,6 +53,7 @@ def init_db():
             )
         """)
         
+        # settings table
         c.execute("""
             CREATE TABLE IF NOT EXISTS settings (
                 key TEXT PRIMARY KEY,
@@ -71,7 +73,7 @@ def get_current_upload_folder():
 
 def is_local_ip(ip):
     """Check if IP belongs to a local network range (192.x / 10.x / 172.x)."""
-    return ip.startswith("192.") or ip.startswith("10.")
+    return ip.startswith("192.") or ip.startswith("10.") or ip.startswith("172.")
 
 def allowed_file(filename):
     """Check if uploaded file has an allowed extension."""
@@ -82,7 +84,7 @@ def get_api_key(ip):
     with sqlite3.connect(DB_FILE) as conn:
         c = conn.cursor()
         c.execute("SELECT key, status FROM api_keys WHERE ip=?", (ip,))
-        return c.fetchone()
+        return c.fetchone()  # returns (key, status) or None
 
 def save_api_key(ip, key, name, status="pending"):
     """Insert or update a device entry in the database."""
@@ -103,13 +105,13 @@ def update_last_request(ip):
         conn.commit()
 
 
-def log_request(ip, method, url, api_key, status="received"):
+def log_request(ip, method, url, status="received"):
     """Insert a request log entry."""
     with sqlite3.connect(DB_FILE) as conn:
         c = conn.cursor()
         c.execute(
-            "INSERT INTO request_logs (timestamp, ip, method, url, api_key, status) VALUES (?, ?, ?, ?, ?, ?)",
-            (datetime.datetime.now().isoformat(), ip, method, url, api_key, status)
+            "INSERT INTO request_logs (timestamp, ip, method, url, status) VALUES (?, ?, ?, ?, ?)",
+            (datetime.datetime.now().isoformat(), ip, method, url, status)
         )
         conn.commit()
 
@@ -117,7 +119,7 @@ def get_logs(limit=100):
     """Retrieve the latest request logs."""
     with sqlite3.connect(DB_FILE) as conn:
         c = conn.cursor()
-        c.execute("SELECT * FROM request_logs ORDER BY id DESC LIMIT ?", (limit,))
+        c.execute("SELECT id, timestamp, ip, method, url, status FROM request_logs ORDER BY id DESC LIMIT ?", (limit,))
         return c.fetchall()
 
 def clear_logs():
@@ -128,7 +130,6 @@ def clear_logs():
         conn.commit()
 
 def save_setting(key, value):
-    """Save settings."""
     with sqlite3.connect("server_api.db") as conn:
         c = conn.cursor()
         c.execute("""
@@ -139,7 +140,6 @@ def save_setting(key, value):
         conn.commit()
 
 def load_setting(key, default=None):
-    """Retrieve settings."""
     with sqlite3.connect("server_api.db") as conn:
         c = conn.cursor()
         c.execute("SELECT value FROM settings WHERE key=?", (key,))
@@ -153,12 +153,18 @@ def log_every_request():
     requester_ip = request.headers.get('X-Forwarded-For', request.remote_addr).split(',')[0].strip()
     now = datetime.datetime.now()
     provided_api_key = request.headers.get('X-API-Key')
+
+    # Console log
     print(f"[{now.isoformat()}] - Incoming request: {request.method} {request.url} from {requester_ip}")
 
+    # Skip logging for admin endpoints (self-requests)
     if request.path.startswith("/admin") or request.path.startswith("/static"):
         return
 
-    log_request(requester_ip, request.method, request.url, provided_api_key, status="received")
+    # DB log
+    log_request(requester_ip, request.method, request.url, status="received")
+
+    # Update device last_request if allowed
     api_key_info = get_api_key(requester_ip)
     if api_key_info and api_key_info[1] == "allowed":
         update_last_request(requester_ip)
@@ -171,7 +177,7 @@ def api_get_logs():
     logs = get_logs(100)
     return jsonify([
         {"id": l[0], "timestamp": l[1], "ip": l[2], "method": l[3],
-         "url": l[4], "api_key": l[5], "status": l[6]}
+         "url": l[4], "status": l[5]}
         for l in logs
     ])
 
@@ -268,7 +274,15 @@ def update_settings():
     if not upload_folder:
         upload_folder = ''
 
+    # Save in SQLite
     with sqlite3.connect(DB_FILE) as conn:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS settings (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                key TEXT UNIQUE,
+                value TEXT
+            )
+        """)
         conn.execute("""
             INSERT INTO settings (key, value)
             VALUES (?, ?)
@@ -277,17 +291,18 @@ def update_settings():
         conn.commit()
 
     global UPLOAD_FOLDER
-    UPLOAD_FOLDER = upload_folder
-
+    UPLOAD_FOLDER = upload_folder  
     return jsonify({"message": "Settings updated", "upload_folder": upload_folder})
 
 # --- Public API Routes ---
+
 @app.route('/check_status', methods=['POST'])
 def check_status():
     """Check if a device is allowed and has a valid API key."""
     requester_ip = request.headers.get('X-Forwarded-For', request.remote_addr).split(',')[0].strip()
     provided_api_key = (request.headers.get('X-API-Key') or "").strip()
 
+    # Only allow requests from local IPs
     if not is_local_ip(requester_ip):
         abort(403, description="Forbidden: Client IP not local.")
 
@@ -312,9 +327,11 @@ def upload_image():
     requester_ip = request.headers.get('X-Forwarded-For', request.remote_addr).split(',')[0].strip()
     provided_api_key = request.headers.get('X-API-Key')
 
+    # Verify local IP
     if not is_local_ip(requester_ip):
         abort(403, description="Forbidden: Client IP not local.")
 
+    # Verify API key status
     key_info = get_api_key(requester_ip)
     if not key_info or key_info[1] != "allowed":
         abort(401, description="Unauthorized: Device not allowed.")
@@ -323,9 +340,11 @@ def upload_image():
     if provided_api_key != stored_key:
         abort(401, description="Unauthorized: Invalid API key.")
 
+    # Current timestamp for filename
     now = datetime.datetime.now()
     datetime_str = now.strftime("%Y%m%d_%H%M")
 
+    # Validate photo metadata
     photo_name = request.headers.get('X-Photo-Name')
     if not photo_name or not request.data:
         abort(400, description="Bad Request: Missing photo name or data.")
@@ -334,26 +353,32 @@ def upload_image():
     if not allowed_file(filename_base):
         abort(400, description="Bad Request: File type not allowed.")
 
+    # Determine upload folder
     base_upload_folder = get_current_upload_folder()
 
+    # Create daily folder (yyyy-mm-dd)
     today_folder = now.strftime("%Y-%m-%d")
     daily_upload_folder = os.path.join(base_upload_folder, today_folder)
     os.makedirs(daily_upload_folder, exist_ok=True)
 
+    # Use photo name as subfolder
     base_name, ext = os.path.splitext(filename_base)
     final_folder = os.path.join(daily_upload_folder, base_name)
     os.makedirs(final_folder, exist_ok=True)
 
+    # Append datetime to filename
     final_filename = f"{base_name.upper()}_{datetime_str}{ext}"
     counter = 1
     while os.path.exists(os.path.join(final_folder, final_filename)):
         final_filename = f"{base_name.upper()}_{datetime_str} ({counter}){ext}"
         counter += 1
 
+    # Save file
     filepath = os.path.join(final_folder, final_filename)
     with open(filepath, 'wb') as f:
         f.write(request.data)
 
+    # Update last request timestamp
     update_last_request(requester_ip)
     return jsonify({"message": f"Photo uploaded successfully as {final_filename}"}), 200
 
@@ -366,11 +391,13 @@ def register_key():
     key = data.get('key')
     device_name = data.get('device_name', 'Unnamed Device')
 
+    # Only local IPs allowed
     if not is_local_ip(requester_ip):
         abort(403, description="Forbidden: Client IP not local.")
     if not key:
         abort(400, description="Bad Request: Missing 'key'.")
 
+    # Check if device already exists
     key_info = get_api_key(requester_ip)
     if key_info:
         stored_key, status = key_info
@@ -379,12 +406,16 @@ def register_key():
         elif status == "pending":
             return jsonify({"message": "Device IP is already pending approval."}), 200
 
+    # Save new device as pending
     save_api_key(requester_ip, key, device_name, status="pending")
     return jsonify({"message": "Key submitted for approval."}), 202
 
 
 # --- Main Entry ---
 if __name__ == "__main__":
-    # os.makedirs(UPLOAD_FOLDER, exist_ok=True)   # Ensure upload folder exists
     init_db()                                   # Initialize database
-    app.run(host="0.0.0.0", port=6868, debug=True)  # Run Flask app on all interfaces
+    # app.run(host="0.0.0.0", port=6868, debug=True)  # Run Flask app on all interfaces
+    
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger("waitress")
+    serve(app, host="0.0.0.0", port=6868, threads=8)
